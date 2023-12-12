@@ -1,37 +1,33 @@
 <template>
   <section class="ac-container">
-    <div>
-      <input id="ac-1" name="accordion-1" type="radio" checked />
-      <label for="ac-1">О нас</label>
-      <article>
-        <p>Какой нибудь замечательный текст... </p>
-      </article>
-    </div>
-    <div>
-      <input id="ac-2" name="accordion-1" type="radio" />
-      <label for="ac-2">Услуги</label>
-      <article>
-        <p>Какой нибудь замечательный текст...</p>
-      </article>
-    </div>
-    <div>
-      <input id="ac-3" name="accordion-1" type="radio" />
-      <label for="ac-3">Портфолио</label>
-      <article>
-        <p>Какой нибудь замечательный текст...</p>
-      </article>
-    </div>
-    <div>
-      <input id="ac-4" name="accordion-1" type="radio" />
-      <label for="ac-4">Контакты</label>
-      <article>
-        <p>Какой нибудь замечательный текст...</p>
-      </article>
-    </div>
+    <accordion-card
+        v-for="accordion in accordionsItems" :key="accordion.id"
+        :label="accordion.label"
+        :content="accordion.content"
+    />
   </section>
 </template>
 
 <script>
+import AccordionCard from "@/components/Accordion/AccordionCard.vue";
+
+export default {
+  components: {AccordionCard},
+  data() {
+    return {
+      accordionsItems: [
+        {id: 0, label: "О нас", content: "Какой нибудь замечательный текст..."},
+        {id: 1, label: "Услуги", content: "Какой нибудь замечательный текст..."},
+        {id: 2, label: "Портфолио", content: "Какой нибудь замечательный текст..."},
+        {id: 3, label: "Контакты", content: "Какой нибудь замечательный текст..."}
+      ]
+    }
+  }
+}
+/* Todo:
+     1. Сделать компоент более гибким и масштабируемым ✔
+     2. Исправить баг с закрытием аккордиона ✔
+ */
 </script>
 
 <style>
@@ -125,5 +121,14 @@
     padding: 20px;
     text-shadow: 1px 1px 1px rgba(66, 35, 35, 0.8);
   }
-
+  @media (max-width: 320px) and (min-width: 0px) {
+    .ac-container {
+      width: 280px;
+    }
+  }
+  @media (max-width: 480px) and (min-width: 320px) {
+    .ac-container {
+      width: 300px;
+    }
+  }
 </style>
